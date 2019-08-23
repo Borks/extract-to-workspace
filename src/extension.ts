@@ -1,24 +1,32 @@
 import * as vscode from 'vscode';
 
+
 export function activate(context: vscode.ExtensionContext) {
 	console.log('activated')
 
-	let extractToWorkspace = vscode.commands.registerCommand('extension.extractToWorkspace', () => {
-		let activeEditor =  vscode.window.activeTextEditor;
+	let extractToWorkspace = vscode.commands.registerCommand(
+		'extension.extractToWorkspace', (file = undefined) => {
+			let activeEditor =  vscode.window.activeTextEditor;
 
-		if (activeEditor !== undefined) {
-			let activeDocumentPath = activeEditor.document.fileName;
-			let folderPath = activeDocumentPath.substring(0, activeDocumentPath.lastIndexOf("\\") + 1)
-			let folderURI = vscode.Uri.file(folderPath);
+			if (activeEditor !== undefined) {
+				let activeDocumentPath = activeEditor.document.fileName;
+				let folderPath = activeDocumentPath.substring(0, activeDocumentPath.lastIndexOf("\\") + 1)
+				let folderURI = vscode.Uri.file(folderPath);
 
-			let folders = folderPath.split('\\');
-			let folderName = folders[folders.length - 1];
+				let folders = folderPath.split('\\');
+				let folderName = folders[folders.length - 1];
 
-			vscode.workspace.updateWorkspaceFolders(0, null, {name: folderName, uri: folderURI})
+				vscode.workspace.updateWorkspaceFolders(0, null, {name: folderName, uri: folderURI})
+			}
 		}
-	});
+	);
 
-	let extractToNewWorkspace = vscode.commands.registerCommand('extension.extractToNewWorkspace', () => {});
+	let extractToNewWorkspace = vscode.commands.registerCommand(
+		'extension.extractToNewWorkspace', (file = undefined) => {
+			console.log(file);
+			vscode.commands.executeCommand('vscode.openFolder', file, true);
+		}
+	);
 
 	context.subscriptions.push(extractToWorkspace);
 	context.subscriptions.push(extractToNewWorkspace);
