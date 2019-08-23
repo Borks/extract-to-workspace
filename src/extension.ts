@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import { Uri } from 'vscode';
 
 
 export function activate(context: vscode.ExtensionContext) {
@@ -6,16 +7,15 @@ export function activate(context: vscode.ExtensionContext) {
 
 	let extractToWorkspace = vscode.commands.registerCommand(
 		'extension.extractToWorkspace', (file = undefined) => {
-			let activeEditor =  vscode.window.activeTextEditor;
+			if (file !== undefined) {
+				var folderURI = Uri.file(file);
+			} else {
+				var folderURI = getActiveFolderUriFromEditor();
+			}
 
-			if (activeEditor !== undefined) {
-				let activeDocumentPath = activeEditor.document.fileName;
-				let folderPath = activeDocumentPath.substring(0, activeDocumentPath.lastIndexOf("\\") + 1)
-				let folderURI = vscode.Uri.file(folderPath);
-
-				let folders = folderPath.split('\\');
+			if (folderURI) {
+				let folders = folderURI.fsPath.split('\\');
 				let folderName = folders[folders.length - 1];
-
 				vscode.workspace.updateWorkspaceFolders(0, null, {name: folderName, uri: folderURI})
 			}
 		}
@@ -23,8 +23,12 @@ export function activate(context: vscode.ExtensionContext) {
 
 	let extractToNewWorkspace = vscode.commands.registerCommand(
 		'extension.extractToNewWorkspace', (file = undefined) => {
-			console.log(file);
-			vscode.commands.executeCommand('vscode.openFolder', file, true);
+			if (file !== undefined) {
+				vscode.commands.executeCommand('vscode.openFolder', file, true);
+			} else {
+				let folderURI = getActiveFolderUriFromEditor();
+				vscode.commands.executeCommand('vscode.openFolder', folderURI, true);
+			}
 		}
 	);
 
@@ -32,6 +36,20 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(extractToNewWorkspace);
 
 }
+
+function getActiveFolderUriFromEditor(): Uri | null {
+	let activeEditor =  vscode.window.activeTextEditor;
+
+	if (activeEditor !== undefined) {
+		let activeDocumentPath = activeEditor.document.fileName;
+		let folderPath = activeDocumentPath.substring(0, activeDocumentPath.lastIndexOf("\\") + 1)
+
+		return Uri.file(folderPath)
+	} else {
+		return null;
+	}
+};
+
 
 // this method is called when your extension is deactivated
 export function deactivate() {}
