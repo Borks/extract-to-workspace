@@ -8,7 +8,7 @@ export function activate(context: vscode.ExtensionContext) {
 	let extractToWorkspace = vscode.commands.registerCommand(
 		'extension.extractToWorkspace', (file = undefined) => {
 			if (file !== undefined) {
-				var folderURI = Uri.file(file);
+				var folderURI = Uri.file(file.fsPath);
 			} else {
 				var folderURI = getActiveFolderUriFromEditor();
 			}
@@ -20,6 +20,7 @@ export function activate(context: vscode.ExtensionContext) {
 			}
 		}
 	);
+
 
 	let extractToNewWorkspace = vscode.commands.registerCommand(
 		'extension.extractToNewWorkspace', (file = undefined) => {
