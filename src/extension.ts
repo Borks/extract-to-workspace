@@ -14,7 +14,8 @@ export function activate(context: vscode.ExtensionContext) {
 			}
 
 			if (folderURI) {
-				let folders = folderURI.fsPath.split('\\');
+
+				let folders = folderURI.fsPath.replace('\\', '/').split('/');
 				let folderName = folders[folders.length - 1];
 				vscode.workspace.updateWorkspaceFolders(0, null, {name: folderName, uri: folderURI})
 			}
@@ -42,8 +43,8 @@ function getActiveFolderUriFromEditor(): Uri | null {
 	let activeEditor =  vscode.window.activeTextEditor;
 
 	if (activeEditor !== undefined) {
-		let activeDocumentPath = activeEditor.document.fileName;
-		let folderPath = activeDocumentPath.substring(0, activeDocumentPath.lastIndexOf("\\") + 1)
+		let activeDocumentPath = activeEditor.document.fileName.replace('\\', '/');
+		let folderPath = activeDocumentPath.substring(0, activeDocumentPath.lastIndexOf("/") + 1)
 
 		return Uri.file(folderPath)
 	} else {
