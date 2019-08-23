@@ -3,6 +3,11 @@
 	"displayName": "Extract To Workspace",
 	"description": "Extract folder to current or new workspace",
 	"version": "1.0.0",
+	"publisher": "BorkaCodes",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Borks/extract-to-workspace"
+	},
 	"engines": {
 		"vscode": "^1.37.0"
 	},
