@@ -10,14 +10,34 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.extractToWorkspace"
+		"*"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
-		"commands": [{
-			"command": "extension.extractToWorkspace",
-			"title": "Extract folder to workspace"
-		}]
+		"commands": [
+			{
+				"command": "extension.extractToWorkspace",
+				"title": "Extract to workspace"
+			},
+			{
+				"command": "extension.extractToNewWorkspace",
+				"title": "Extract to new workspace"
+			}
+		],
+		"menus": {
+			"explorer/context": [
+				{
+					"command": "extension.extractToWorkspace",
+					"category": "extract_to_workspace",
+					"when": "explorerResourceIsFolder"
+				},
+				{
+					"command": "extension.extractToNewWorkspace",
+					"category": "extract_to_workspace",
+					"when": "explorerResourceIsFolder"
+				}
+			]
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "yarn run compile",

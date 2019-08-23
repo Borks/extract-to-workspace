@@ -1,9 +1,9 @@
 import * as vscode from 'vscode';
 
 export function activate(context: vscode.ExtensionContext) {
+	console.log('activated')
 
-
-	let disposable = vscode.commands.registerCommand('extension.extractToWorkspace', () => {
+	let extractToWorkspace = vscode.commands.registerCommand('extension.extractToWorkspace', () => {
 		let activeEditor =  vscode.window.activeTextEditor;
 
 		if (activeEditor !== undefined) {
@@ -18,7 +18,10 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	});
 
-	context.subscriptions.push(disposable);
+	let extractToNewWorkspace = vscode.commands.registerCommand('extension.extractToNewWorkspace', () => {});
+
+	context.subscriptions.push(extractToWorkspace);
+	context.subscriptions.push(extractToNewWorkspace);
 
 }
 
