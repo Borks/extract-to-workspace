@@ -2,7 +2,7 @@
 	"name": "extract-to-workspace",
 	"displayName": "Extract To Workspace",
 	"description": "Extract folder to current or new workspace",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"publisher": "BorkaCodes",
 	"repository": {
 		"type": "git",
@@ -22,11 +22,11 @@
 		"commands": [
 			{
 				"command": "extension.extractToWorkspace",
-				"title": "Extract to workspace"
+				"title": "Extract to Workspace"
 			},
 			{
 				"command": "extension.extractToNewWorkspace",
-				"title": "Extract to new workspace"
+				"title": "Extract to New Workspace"
 			}
 		],
 		"menus": {

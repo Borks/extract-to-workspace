@@ -7,6 +7,10 @@
 
 ## Release Notes
 
+### 1.0.2
+
+Fixed issue with running on Mac/Linux operating system.
+
 ### 1.0.0
 
 Initial release with basic functionality
