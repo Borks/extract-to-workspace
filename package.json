@@ -4,6 +4,7 @@
 	"description": "Extract folder to current or new workspace",
 	"version": "1.0.2",
 	"publisher": "BorkaCodes",
+	"icon": "icon.png",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/Borks/extract-to-workspace"
