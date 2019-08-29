@@ -7,6 +7,10 @@
 
 ## Release Notes
 
+### 1.0.4
+
+Tslint fixes.
+
 ### 1.0.2
 
 Fixed issue with running on Mac/Linux operating system.

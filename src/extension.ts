@@ -3,21 +3,22 @@ import { Uri } from 'vscode';
 
 
 export function activate(context: vscode.ExtensionContext) {
-	console.log('activated')
 
 	let extractToWorkspace = vscode.commands.registerCommand(
-		'extension.extractToWorkspace', (file = undefined) => {
+		'extension.extractToWorkspace',
+		(file = undefined) => {
+			var folderURI: Uri | null;
 			if (file !== undefined) {
-				var folderURI = Uri.file(file.fsPath);
+				folderURI = Uri.file(file.fsPath);
 			} else {
-				var folderURI = getActiveFolderUriFromEditor();
+				folderURI = getActiveFolderUriFromEditor();
 			}
 
 			if (folderURI) {
 
 				let folders = folderURI.fsPath.replace('\\', '/').split('/');
 				let folderName = folders[folders.length - 1];
-				vscode.workspace.updateWorkspaceFolders(0, null, {name: folderName, uri: folderURI})
+				vscode.workspace.updateWorkspaceFolders(0, null, {name: folderName, uri: folderURI});
 			}
 		}
 	);
@@ -44,13 +45,13 @@ function getActiveFolderUriFromEditor(): Uri | null {
 
 	if (activeEditor !== undefined) {
 		let activeDocumentPath = activeEditor.document.fileName.replace('\\', '/');
-		let folderPath = activeDocumentPath.substring(0, activeDocumentPath.lastIndexOf("/") + 1)
+		let folderPath = activeDocumentPath.substring(0, activeDocumentPath.lastIndexOf("/") + 1);
 
-		return Uri.file(folderPath)
+		return Uri.file(folderPath);
 	} else {
 		return null;
 	}
-};
+}
 
 
 // this method is called when your extension is deactivated

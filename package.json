@@ -2,7 +2,7 @@
 	"name": "extract-to-workspace",
 	"displayName": "Extract To Workspace",
 	"description": "Extract folder to current or new workspace",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"publisher": "BorkaCodes",
 	"icon": "icon.png",
 	"repository": {
