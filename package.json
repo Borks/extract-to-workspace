@@ -2,7 +2,7 @@
 	"name": "extract-to-workspace",
 	"displayName": "Extract To Workspace",
 	"description": "Extract folder to current or new workspace",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"publisher": "BorkaCodes",
 	"icon": "icon.png",
 	"repository": {
@@ -34,13 +34,11 @@
 			"explorer/context": [
 				{
 					"command": "extension.extractToWorkspace",
-					"category": "extract_to_workspace",
-					"when": "explorerResourceIsFolder"
+					"category": "extract_to_workspace"
 				},
 				{
 					"command": "extension.extractToNewWorkspace",
-					"category": "extract_to_workspace",
-					"when": "explorerResourceIsFolder"
+					"category": "extract_to_workspace"
 				}
 			]
 		}
